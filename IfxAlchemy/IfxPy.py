@@ -27,7 +27,11 @@
 
 import re
 from .base import IfxExecutionContext, IfxDialect
-from sqlalchemy import processors, types as sa_types, util
+from sqlalchemy import types as sa_types, util
+if sqlalchemy.__version__ > '1.4.9':
+    from sqlalchemy.engine import processors
+else:
+    from sqlalchemy import processors
 from sqlalchemy import __version__ as SA_Version
 from sqlalchemy.exc import ArgumentError
 SA_Version = [int(ver_token) for ver_token in SA_Version.split('.')[0:2]]
